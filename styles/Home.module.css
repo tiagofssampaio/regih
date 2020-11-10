@@ -35,7 +35,7 @@
   align-items: center;
 }
 
-.title a {
+.title {
   color: #0070f3;
   text-decoration: none;
 }
@@ -80,9 +80,9 @@
   margin-top: 3rem;
 }
 
-.card {
+.card button{
   margin: 1rem;
-  flex-basis: 45%;
+  flex-basis: 100%;
   padding: 1.5rem;
   text-align: left;
   color: inherit;
@@ -92,11 +92,10 @@
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
-.card:hover,
-.card:focus,
-.card:active {
+.card button:hover {
   color: #0070f3;
   border-color: #0070f3;
+  cursor: pointer;
 }
 
 .card h3 {
