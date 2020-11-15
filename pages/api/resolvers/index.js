@@ -18,7 +18,7 @@ export const resolvers = {
             return await db.query(escape`
               SELECT *
               FROM client
-              ORDER BY client_id
+              ORDER BY client_id DESC
             `);
         },
 
