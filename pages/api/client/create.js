@@ -2,21 +2,18 @@ const db = require('../../../lib/db')
 const escape = require('sql-template-strings')
 
 export default async (req, res) => {
-    let page = parseInt(req.query.page) || 1
-    const limit = parseInt(req.query.limit) || 5
-    if (page < 1) page = 1
-    const items = await db.query(escape`
-      SELECT *
-      FROM client
-      ORDER BY client_id
-      LIMIT ${(page - 1) * limit}, ${limit}
+
+    if (req.method !== 'POST') {
+        return res.status(404).end()
+    }
+
+    const client = await db.query(escape`
+      INSERT INTO client
+      (name, vat_id, rate)
+      VALUES
+      ('${req.query.name}', '${req.query.vat_id}', ${req.query.rate})
     `)
-    const count = await db.query(escape`
-      SELECT COUNT(*)
-      AS clientsCount
-      FROM client
-    `)
-    const { clientsCount } = count[0]
-    const total_items = Math.ceil(clientsCount / limit)
-    res.status(200).json({ items, total_items, page })
+
+
+    res.status(200).json({ method: req.method})
 }

@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-micro";
+import { gql } from 'apollo-server-micro';
 
 export const typeDefs = gql`    
     type Client {
@@ -7,6 +7,7 @@ export const typeDefs = gql`
         vat_id: String
         rate: Float
         created_at: String
+        tasks: [Task]
     }
 
     type Task {
@@ -15,29 +16,47 @@ export const typeDefs = gql`
         description: String
         special_rate: Float
         created_at: String
+        client: Client!
+        times: [TaskTime]
     }
 
     type TaskTime {
         task_id: String
-        start_time: String,
+        start_time: String
         end_time: String
     }
 
+    type Invoice {
+        invoice_id: ID
+        value: Float
+        file: String
+        is_payed: Boolean
+        comment: String
+        created_at: String
+        tasks: TaskInvoice
+    }
+    
     type TaskInvoice {
-        task_id: String
-        invoice_id: String
+        tasks: [Task!]!
+        invoice: Invoice!
     }
 
     type Query {
-        getClients: [Client]
-        getClient(client_id: ID!): Client
+        clients: [Client]
+        client(client_id: ID!): Client
+
+        tasks: [Task]
+        task(task_id: ID, client_id: String): Task
+    }
+
+    type Mutation {
         createClient(name: String, vat_id: String, rate: Float): Client
         updateClient(client_id: ID!, name: String, vat_id: String, rate: Float): Client
         deleteClient(client_id: ID!): Boolean
 
-        getTasks: [Task]
-        getTask(task_id: ID, client_id: String): Task
         createTask(client_id: String, vat_id: String, rate: Float): Task
         updateTask(task_id: ID, name: String, vat_id: String, rate: Float): Task
-        deleteTask(task_id: String): Boolean
-    }`
+        deleteTask(task_id: ID): Boolean
+    }
+
+`

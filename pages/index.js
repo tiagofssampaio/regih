@@ -4,9 +4,11 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
 
-    function register()
+    async function register()
     {
-        alert("timer started")
+        const response = await fetch('/api/hello')
+        const id = await response.json()
+        console.log('response', id)
     }
 
     return (
