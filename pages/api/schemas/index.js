@@ -47,6 +47,9 @@ export const typeDefs = gql`
 
         tasks: [Task]
         task(task_id: ID, client_id: String): Task
+
+        invoices: [Invoice]
+        invoice(invoice_id: ID, task_id: String, client_id: String): Invoice
     }
 
     type Mutation {

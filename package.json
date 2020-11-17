@@ -9,10 +9,12 @@
   },
   "dependencies": {
     "apollo-server-micro": "^2.19.0",
+    "knex": "^0.21.12",
+    "mysql": "^2.18.1",
     "next": "10.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "serverless-mysql": "^1.5.4",
-    "sql-template-strings": "^2.2.2"
+    "sequelize": "^6.3.5",
+    "sequelize-cli": "^6.2.0"
   }
 }
