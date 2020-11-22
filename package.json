@@ -8,13 +8,20 @@
     "start": "next start"
   },
   "dependencies": {
+    "@nexus/schema": "^0.18.0",
+    "@prisma/client": "^2.11.0",
     "apollo-server-micro": "^2.19.0",
     "knex": "^0.21.12",
     "mysql": "^2.18.1",
     "next": "10.0.1",
+    "nexus-plugin-prisma": "^0.24.0",
+    "prisma": "^1.35.0-beta",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0"
+  },
+  "devDependencies": {
+    "@prisma/cli": "^2.11.0"
   }
 }

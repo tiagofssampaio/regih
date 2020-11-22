@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Client {
+  id            Int      @default(autoincrement()) @id
+  name          String
+  vatId         String
+  rate          Float
+  createdAt     DateTime @default(now())
+}
+
+model Task {
+  id            Int      @default(autoincrement()) @id
+  clientId      Int
+  description   String
+  specialRate   Float
+  createdAt     DateTime @default(now())
+  client        Client   @relation(fields: [clientId], references: [id])
+}
+
+model TaskTime {
+    taskId      Int
+    startTime   DateTime
+    endTime     DateTime
+    task        Task     @relation(fields: [taskId], references: [id])
+    @@unique([taskId, startTime, endTime], name: "TASKTIME_TASKID_STARTTIME_ENDTIME")
+}
+
+model Invoice {
+    id          Int      @default(autoincrement()) @id
+    value       Float
+    file        String
+    is_payed    Boolean
+    pay_date    DateTime
+    comment     String
+    createdAt   DateTime @default(now())
+}
+
+model TaskInvoice {
+    taskId      Int
+    invoiceId   Int
+    task        Task    @relation(fields: [taskId], references: [id])
+    invoice     Invoice @relation(fields: [invoiceId], references: [id])
+    @@unique([taskId, invoiceId], name: "TASKINVOICE_TASKID_INVOICEID")
+}
