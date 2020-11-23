@@ -82,7 +82,7 @@
       "model": "Client",
       "field": "vatId",
       "type": "String",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateDirective",
@@ -176,7 +176,7 @@
     {
       "tag": "CreateField",
       "model": "Client",
-      "field": "task",
+      "field": "tasks",
       "type": "Task",
       "arity": "List"
     },
@@ -287,7 +287,7 @@
       "model": "Task",
       "field": "description",
       "type": "String",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateField",
@@ -554,7 +554,7 @@
       "model": "TaskTime",
       "field": "endTime",
       "type": "DateTime",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateDirective",
@@ -659,11 +659,11 @@
           "arguments": [
             {
               "name": "",
-              "value": "[taskId, startTime, endTime]"
+              "value": "[taskId, startTime]"
             },
             {
               "name": "name",
-              "value": "\"TASK_TIME_TASK_ID_START_TIME_END_TIME\""
+              "value": "\"TASK_TIME_TASK_ID_START_TIME\""
             }
           ]
         },
@@ -764,11 +764,36 @@
       "value": "\"is_payed\""
     },
     {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Invoice",
+          "field": "isPayed"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Invoice",
+          "field": "isPayed"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "false"
+    },
+    {
       "tag": "CreateField",
       "model": "Invoice",
       "field": "payDate",
       "type": "DateTime",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateDirective",
@@ -800,7 +825,7 @@
       "model": "Invoice",
       "field": "comment",
       "type": "String",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateField",
@@ -960,52 +985,6 @@
     {
       "tag": "CreateField",
       "model": "TaskInvoice",
-      "field": "task",
-      "type": "Task",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "TaskInvoice",
-          "field": "task"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "TaskInvoice",
-          "field": "task"
-        },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[taskId]"
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "TaskInvoice",
-          "field": "task"
-        },
-        "directive": "relation"
-      },
-      "argument": "references",
-      "value": "[id]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "TaskInvoice",
       "field": "invoice",
       "type": "Invoice",
       "arity": "Required"
@@ -1043,6 +1022,52 @@
           "tag": "Field",
           "model": "TaskInvoice",
           "field": "invoice"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "TaskInvoice",
+      "field": "task",
+      "type": "Task",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "TaskInvoice",
+          "field": "task"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "TaskInvoice",
+          "field": "task"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[taskId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "TaskInvoice",
+          "field": "task"
         },
         "directive": "relation"
       },
@@ -1101,11 +1126,11 @@
           "arguments": [
             {
               "name": "",
-              "value": "[taskId]"
+              "value": "[invoiceId]"
             },
             {
               "name": "name",
-              "value": "\"task_id\""
+              "value": "\"invoice_id\""
             }
           ]
         },
@@ -1121,11 +1146,11 @@
           "arguments": [
             {
               "name": "",
-              "value": "[invoiceId]"
+              "value": "[taskId]"
             },
             {
               "name": "name",
-              "value": "\"invoice_id\""
+              "value": "\"task_id\""
             }
           ]
         },
