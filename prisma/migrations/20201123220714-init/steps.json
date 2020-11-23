@@ -253,6 +253,52 @@
     {
       "tag": "CreateField",
       "model": "Task",
+      "field": "client",
+      "type": "Client",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Task",
+          "field": "client"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Task",
+          "field": "client"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[clientId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Task",
+          "field": "client"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Task",
       "field": "clientId",
       "type": "Int",
       "arity": "Required"
@@ -324,6 +370,91 @@
     {
       "tag": "CreateField",
       "model": "Task",
+      "field": "invoice",
+      "type": "Invoice",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Task",
+          "field": "invoice"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Task",
+          "field": "invoice"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[invoiceId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Task",
+          "field": "invoice"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Task",
+      "field": "invoiceId",
+      "type": "Int",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Task",
+          "field": "invoiceId"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Task",
+          "field": "invoiceId"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"invoice_id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "Task",
+      "field": "times",
+      "type": "TaskTime",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Task",
       "field": "createdAt",
       "type": "DateTime",
       "arity": "Required"
@@ -379,66 +510,6 @@
       "value": "\"created_at\""
     },
     {
-      "tag": "CreateField",
-      "model": "Task",
-      "field": "client",
-      "type": "Client",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Task",
-          "field": "client"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Task",
-          "field": "client"
-        },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[clientId]"
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Task",
-          "field": "client"
-        },
-        "directive": "relation"
-      },
-      "argument": "references",
-      "value": "[id]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Task",
-      "field": "invoices",
-      "type": "TaskInvoice",
-      "arity": "List"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Task",
-      "field": "times",
-      "type": "TaskTime",
-      "arity": "List"
-    },
-    {
       "tag": "CreateDirective",
       "location": {
         "path": {
@@ -471,10 +542,6 @@
             {
               "name": "",
               "value": "[clientId]"
-            },
-            {
-              "name": "name",
-              "value": "\"client_id\""
             }
           ]
         },
@@ -484,6 +551,95 @@
     {
       "tag": "CreateModel",
       "model": "TaskTime"
+    },
+    {
+      "tag": "CreateField",
+      "model": "TaskTime",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "TaskTime",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "TaskTime",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "TaskTime",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "autoincrement()"
+    },
+    {
+      "tag": "CreateField",
+      "model": "TaskTime",
+      "field": "task",
+      "type": "Task",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "TaskTime",
+          "field": "task"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "TaskTime",
+          "field": "task"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[taskId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "TaskTime",
+          "field": "task"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
     },
     {
       "tag": "CreateField",
@@ -582,52 +738,6 @@
       "value": "\"end_time\""
     },
     {
-      "tag": "CreateField",
-      "model": "TaskTime",
-      "field": "task",
-      "type": "Task",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "TaskTime",
-          "field": "task"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "TaskTime",
-          "field": "task"
-        },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[taskId]"
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "TaskTime",
-          "field": "task"
-        },
-        "directive": "relation"
-      },
-      "argument": "references",
-      "value": "[id]"
-    },
-    {
       "tag": "CreateDirective",
       "location": {
         "path": {
@@ -660,10 +770,6 @@
             {
               "name": "",
               "value": "[taskId, startTime]"
-            },
-            {
-              "name": "name",
-              "value": "\"TASK_TIME_TASK_ID_START_TIME\""
             }
           ]
         },
@@ -746,31 +852,6 @@
           "model": "Invoice",
           "field": "isPayed"
         },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Invoice",
-          "field": "isPayed"
-        },
-        "directive": "map"
-      },
-      "argument": "",
-      "value": "\"is_payed\""
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Invoice",
-          "field": "isPayed"
-        },
         "directive": "default"
       }
     },
@@ -787,6 +868,31 @@
       },
       "argument": "",
       "value": "false"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Invoice",
+          "field": "isPayed"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Invoice",
+          "field": "isPayed"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"is_payed\""
     },
     {
       "tag": "CreateField",
@@ -888,7 +994,7 @@
       "tag": "CreateField",
       "model": "Invoice",
       "field": "tasks",
-      "type": "TaskInvoice",
+      "type": "Task",
       "arity": "List"
     },
     {
@@ -913,249 +1019,6 @@
       },
       "argument": "",
       "value": "\"invoice\""
-    },
-    {
-      "tag": "CreateModel",
-      "model": "TaskInvoice"
-    },
-    {
-      "tag": "CreateField",
-      "model": "TaskInvoice",
-      "field": "taskId",
-      "type": "Int",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "TaskInvoice",
-          "field": "taskId"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "TaskInvoice",
-          "field": "taskId"
-        },
-        "directive": "map"
-      },
-      "argument": "",
-      "value": "\"task_id\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "TaskInvoice",
-      "field": "invoiceId",
-      "type": "Int",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "TaskInvoice",
-          "field": "invoiceId"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "TaskInvoice",
-          "field": "invoiceId"
-        },
-        "directive": "map"
-      },
-      "argument": "",
-      "value": "\"invoice_id\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "TaskInvoice",
-      "field": "invoice",
-      "type": "Invoice",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "TaskInvoice",
-          "field": "invoice"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "TaskInvoice",
-          "field": "invoice"
-        },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[invoiceId]"
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "TaskInvoice",
-          "field": "invoice"
-        },
-        "directive": "relation"
-      },
-      "argument": "references",
-      "value": "[id]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "TaskInvoice",
-      "field": "task",
-      "type": "Task",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "TaskInvoice",
-          "field": "task"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "TaskInvoice",
-          "field": "task"
-        },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[taskId]"
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "TaskInvoice",
-          "field": "task"
-        },
-        "directive": "relation"
-      },
-      "argument": "references",
-      "value": "[id]"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Model",
-          "model": "TaskInvoice"
-        },
-        "directive": "map"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Model",
-          "model": "TaskInvoice"
-        },
-        "directive": "map"
-      },
-      "argument": "",
-      "value": "\"task_invoice\""
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Model",
-          "model": "TaskInvoice",
-          "arguments": [
-            {
-              "name": "",
-              "value": "[taskId, invoiceId]"
-            },
-            {
-              "name": "name",
-              "value": "\"TASK_INVOICE_TASK_ID_INVOICE_ID\""
-            }
-          ]
-        },
-        "directive": "unique"
-      }
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Model",
-          "model": "TaskInvoice",
-          "arguments": [
-            {
-              "name": "",
-              "value": "[invoiceId]"
-            },
-            {
-              "name": "name",
-              "value": "\"invoice_id\""
-            }
-          ]
-        },
-        "directive": "index"
-      }
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Model",
-          "model": "TaskInvoice",
-          "arguments": [
-            {
-              "name": "",
-              "value": "[taskId]"
-            },
-            {
-              "name": "name",
-              "value": "\"task_id\""
-            }
-          ]
-        },
-        "directive": "index"
-      }
     }
   ]
 }

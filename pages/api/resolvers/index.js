@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient({ log: ["query"] });
+const prisma = new PrismaClient(/*{ log: ["query"] }*/);
 
 export const resolvers = {
     Client: {
@@ -27,25 +27,20 @@ export const resolvers = {
                 },
             });
         },
+        invoice: async parent => {
+            return await prisma.invoice.findOne({
+                where: {
+                    id: parent.invoiceId
+                },
+            });
+        },
     },
     Invoice: {
         tasks: async parent => {
-            return await prisma.taskInvoice.findMany({
-                where: {
-                    invoiceId: parent.id
-                },
-            }).then((taskInvoices) => {
-                console.log('taskInvoices', taskInvoices);
-
-                const taskIds = taskInvoices.map(taskInvoice => taskInvoice.taskId)
-
-                return prisma.task.findMany({
-                    where: {
-                        id: taskIds
-                    },
-                })
-
-            });
+            return await prisma.task
+                .findMany({
+                    where: { invoiceId: parent.id },
+                });
         }
     },
     Query: {
@@ -69,7 +64,7 @@ export const resolvers = {
             });
         },
 
-        tasks: async (_, { id }, _ctx, info) => {
+        tasks: async (_, args, _ctx, info) => {
             /**
              * TODO
              * pagination and filters
@@ -84,7 +79,7 @@ export const resolvers = {
             });
         },
 
-        invoices: async (_, args) => {
+        invoices: async (_, args, _ctx, info) => {
             /**
              * TODO
              * pagination and filters

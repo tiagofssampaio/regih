@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-micro';
 
 export const typeDefs = gql`    
     type Client {
-        id: ID!
+        id: ID
         name: String
         vatId: String
         rate: Float
@@ -12,11 +12,13 @@ export const typeDefs = gql`
 
     type Task {
         id: ID
+        client: Client
         clientId: Int
         description: String
         specialRate: Float
         createdAt: String
-        client: Client
+        invoice: Invoice
+        invoiceId: Int
         times: [TaskTime]
     }
 
@@ -31,14 +33,10 @@ export const typeDefs = gql`
         value: Float
         file: String
         isPayed: Boolean
+        payedDate: String
         comment: String
         createdAt: String
         tasks: [Task]
-    }
-    
-    type TaskInvoice {
-        tasks: [Task!]!
-        invoice: Invoice!
     }
 
     type Query {
