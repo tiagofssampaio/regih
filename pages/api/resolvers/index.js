@@ -3,47 +3,85 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient({ log: ["query"] });
 
 export const resolvers = {
+    Client: {
+        tasks: async parent => {
+            return await prisma.task.findMany({
+                where: {
+                    clientId: parent.id
+                },
+            });
+        }
+    },
+    Task: {
+        client: async parent => {
+            return await prisma.client.findOne({
+                where: {
+                    id: parent.clientId
+                },
+            });
+        },
+        times: async parent => {
+            return await prisma.taskTime.findMany({
+                where: {
+                    taskId: parent.id
+                },
+            });
+        },
+    },
+    Invoice: {
+        tasks: async parent => {
+            return await prisma.taskInvoice.findMany({
+                where: {
+                    invoiceId: parent.id
+                },
+            }).then((taskInvoices) => {
+                console.log('taskInvoices', taskInvoices);
+
+                const taskIds = taskInvoices.map(taskInvoice => taskInvoice.taskId)
+
+                return prisma.task.findMany({
+                    where: {
+                        id: taskIds
+                    },
+                })
+
+            });
+        }
+    },
     Query: {
         client: async (_, { id }, _ctx, info) => {
-
-            const client = await prisma.client.findMany({
+            return await prisma.client.findOne({
                 where: { id },
-            })
-
-
-            console.log(client)
-
-            return client;
+            });
         },
-        clients: async (_, { client_id }, _ctx, info) => {
+        clients: async (_, args, _ctx, info) => {
             /**
              * TODO
              * pagination and filters
              * relation with task and task_time
              */
-            const clients = await prisma.client;
-
-
-            console.log('clients', clients)
-
-            return clients;
-
+            return await prisma.client.findMany();
         },
 
-        task: async (_, { task_id }, _ctx, info) => {
-
+        task: async (_, { id }, _ctx, info) => {
+            return await prisma.task.findOne({
+                where: { id },
+            });
         },
 
-        tasks: async (_, { task_id }, _ctx, info) => {
+        tasks: async (_, { id }, _ctx, info) => {
             /**
              * TODO
              * pagination and filters
              * relation with task and task_time
              */
+            return await prisma.task.findMany();
         },
 
-        invoice: (_, { invoice_id }) => {
-
+        invoice: async (_, { id }) => {
+            return await prisma.invoice.findOne({
+                where: { id },
+            });
         },
 
         invoices: async (_, args) => {
@@ -52,6 +90,7 @@ export const resolvers = {
              * pagination and filters
              * relation with task
              */
+            return await prisma.invoice.findMany();
         }
     },
     Mutation: {
