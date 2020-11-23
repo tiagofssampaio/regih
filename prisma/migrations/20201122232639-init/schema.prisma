@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 model Client {
@@ -13,30 +13,30 @@ model Client {
   vatId     String   @map("vat_id")
   rate      Float
   createdAt DateTime @default(now()) @map("created_at")
-  tasks     Task[]
+  task      Task[]
 
   @@map("client")
 }
 
 model Task {
-  id          Int           @id @default(autoincrement())
-  clientId    Int           @map("client_id")
-  description String
-  specialRate Float         @map("special_rate")
-  createdAt   DateTime      @default(now()) @map("created_at")
-  client      Client        @relation(fields: [clientId], references: [id])
-  invoices    TaskInvoice[]
-  times       TaskTime[]
+  id           Int           @id @default(autoincrement())
+  clientId     Int           @map("client_id")
+  description  String
+  specialRate  Float         @map("special_rate")
+  createdAt    DateTime      @default(now()) @map("created_at")
+  client       Client        @relation(fields: [clientId], references: [id])
+  invoices     TaskInvoice[]
+  times        TaskTime[]
 
   @@index([clientId], name: "client_id")
   @@map("task")
 }
 
 model TaskTime {
-  taskId    Int      @map("task_id")
-  startTime DateTime @map("start_time")
-  endTime   DateTime @map("end_time")
-  task      Task     @relation(fields: [taskId], references: [id])
+  taskId     Int    @map("task_id")
+  startTime DateTime   @map("start_time")
+  endTime   DateTime   @map("end_time")
+  task       Task     @relation(fields: [taskId], references: [id])
 
   @@unique([taskId, startTime, endTime], name: "TASK_TIME_TASK_ID_START_TIME_END_TIME")
   @@map("task_time")
@@ -56,13 +56,13 @@ model Invoice {
 }
 
 model TaskInvoice {
-  taskId    Int     @map("task_id")
-  invoiceId Int     @map("invoice_id")
-  invoice   Invoice @relation(fields: [invoiceId], references: [id])
-  task      Task    @relation(fields: [taskId], references: [id])
+  taskId    Int @map("task_id")
+  invoiceId Int @map("invoice_id")
+task       Task    @relation(fields: [taskId], references: [id])
+  invoice    Invoice @relation(fields: [invoiceId], references: [id])
 
   @@unique([taskId, invoiceId], name: "TASK_INVOICE_TASK_ID_INVOICE_ID")
+    @@index([taskId], name: "task_id")
   @@index([invoiceId], name: "invoice_id")
-  @@index([taskId], name: "task_id")
   @@map("task_invoice")
 }

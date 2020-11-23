@@ -13,7 +13,7 @@ const Client = objectType({
             pagination: false,
         })
     },
-})
+});
 
 const Task = objectType({
     name: 'Task',
@@ -25,47 +25,22 @@ const Task = objectType({
         t.model.createdAt()
         t.model.client()
     },
-})
+});
 
 const Query = objectType({
     name: 'Query',
     definition(t) {
         t.crud.client()
-
-        t.list.field('feed', {
-            type: 'Client',
-            resolve: (_, args, ctx) => {
-                return ctx.prisma.post.findMany({
-                    where: { published: true },
-                })
-            },
-        })
-
-        t.list.field('filterClients', {
-            type: 'Client',
-            args: {
-                searchString: stringArg({ nullable: true }),
-            },
-            resolve: (_, { searchString }, ctx) => {
-                return ctx.prisma.client.findMany({
-                    where: {
-                        OR: [
-                            { name: { contains: searchString } },
-                            { vatId: { contains: searchString } },
-                        ],
-                    },
-                })
-            },
-        })
+        t.crud.task()
     },
-})
+});
 
-const schema = makeSchema({
+export default makeSchema({
     types: [Query, Client, Task],
     plugins: [nexusPrisma({ experimentalCRUD: true })],
     outputs: {
-        schema: __dirname + '/../schema.graphql',
-        typegen: __dirname + '/generated/nexus.ts',
+        schema: process.cwd() + '/../schema.graphql',
+        typegen: process.cwd() + '/generated/nexus.ts',
     },
     typegenAutoConfig: {
         contextType: 'Context.Context',
@@ -75,13 +50,9 @@ const schema = makeSchema({
                 alias: 'prisma',
             },
             {
-                source: require.resolve('./context'),
+                source: process.cwd() + '/pages/api/context.ts',
                 alias: 'Context',
             },
         ],
     },
-})
-
-module.exports = {
-    schema,
-}
+});
