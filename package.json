@@ -11,7 +11,6 @@
     "@nexus/schema": "^0.18.0",
     "@prisma/client": "^2.11.0",
     "apollo-server-micro": "^2.19.0",
-    "knex": "^0.21.12",
     "mysql": "^2.18.1",
     "next": "10.0.1",
     "nexus-plugin-prisma": "^0.24.0",
