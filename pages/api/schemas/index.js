@@ -51,13 +51,13 @@ export const typeDefs = gql`
     }
 
     type Mutation {
-        createClient(name: String, vat_id: String, rate: Float): Client
-        updateClient(client_id: ID!, name: String, vat_id: String, rate: Float): Client
-        deleteClient(client_id: ID!): Boolean
+        createClient(name: String, vatId: String, rate: Float): Client
+        updateClient(id: Int!, name: String, vat_id: String, rate: Float): Client
+        deleteClient(id: Int!): Boolean
 
-        createTask(client_id: String, vat_id: String, rate: Float): Task
-        updateTask(task_id: ID, name: String, vat_id: String, rate: Float): Task
-        deleteTask(task_id: ID): Boolean
+        createTask(id: String, vat_id: String, rate: Float): Task
+        updateTask(id: ID, name: String, vat_id: String, rate: Float): Task
+        deleteTask(id: ID): Boolean
     }
 
 `

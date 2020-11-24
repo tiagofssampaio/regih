@@ -89,11 +89,24 @@ export const resolvers = {
         }
     },
     Mutation: {
-        createClient: async (_, { name, vat_id, rate }) => {
+        createClient: async (_, data, _ctx, info) => {
+            return await prisma.client.create({
+                data
+            });
         },
         updateClient: async (_, args) => {
         },
-        deleteClient: async (_, args) => {
+        deleteClient: async (_, { id }) => {
+            try {
+                const result = await prisma.client.delete({
+                    where: {
+                        id
+                    }
+                });
+                return !!result.id;
+            } catch (e) {
+                return false;
+            }
         },
 
         createTask: async (_, args) => {
