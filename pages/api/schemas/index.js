@@ -49,7 +49,7 @@ export const typeDefs = gql`
     }
 
     type Query {
-        clients: [Client]
+        clients(first: Int!, after: String): [Client]
         client(id: ID!): Client
 
 

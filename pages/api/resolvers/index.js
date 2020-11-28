@@ -64,12 +64,12 @@ export const resolvers = {
         }
     },
     Query: {
-        client: async (_, { id }, _ctx, info) => {
+        client: async (_, { id }, context, info) => {
             return await prisma.client.findUnique({
                 where: { id },
             });
         },
-        clients: async (_, args, _ctx, info) => {
+        clients: async (_, args, context, info) => {
             /**
              * TODO
              * pagination and filters
@@ -78,13 +78,13 @@ export const resolvers = {
             return await prisma.client.findMany();
         },
 
-        project: async (_, { id }, _ctx, info) => {
+        project: async (_, { id }, context, info) => {
             return await prisma.project.findUnique({
                 where: { id },
             });
         },
 
-        projects: async (_, args, _ctx, info) => {
+        projects: async (_, args, context, info) => {
             /**
              * TODO
              * pagination and filters
@@ -92,13 +92,13 @@ export const resolvers = {
             return await prisma.project.findMany();
         },
 
-        task: async (_, { id }, _ctx, info) => {
+        task: async (_, { id }, context, info) => {
             return await prisma.task.findUnique({
                 where: { id },
             });
         },
 
-        tasks: async (_, args, _ctx, info) => {
+        tasks: async (_, args, context, info) => {
             /**
              * TODO
              * pagination and filters
@@ -112,7 +112,7 @@ export const resolvers = {
             });
         },
 
-        invoices: async (_, args, _ctx, info) => {
+        invoices: async (_, args, context, info) => {
             /**
              * TODO
              * pagination and filters
@@ -122,7 +122,7 @@ export const resolvers = {
         }
     },
     Mutation: {
-        createClient: async (_, data, _ctx, info) => {
+        createClient: async (_, data, context, info) => {
             return await prisma.client.create({
                 data
             });
