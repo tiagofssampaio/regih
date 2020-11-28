@@ -174,13 +174,6 @@
       "value": "\"created_at\""
     },
     {
-      "tag": "CreateField",
-      "model": "Client",
-      "field": "tasks",
-      "type": "Task",
-      "arity": "List"
-    },
-    {
       "tag": "CreateDirective",
       "location": {
         "path": {
@@ -202,6 +195,248 @@
       },
       "argument": "",
       "value": "\"client\""
+    },
+    {
+      "tag": "CreateModel",
+      "model": "Project"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Project",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Project",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Project",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Project",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "autoincrement()"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Project",
+      "field": "name",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Project",
+      "field": "description",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Project",
+      "field": "client",
+      "type": "Client",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Project",
+          "field": "client"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Project",
+          "field": "client"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[clientId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Project",
+          "field": "client"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Project",
+      "field": "clientId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Project",
+          "field": "clientId"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Project",
+          "field": "clientId"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"client_id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "Project",
+      "field": "createdAt",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Project",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Project",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "now()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Project",
+          "field": "createdAt"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Project",
+          "field": "createdAt"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"created_at\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "Project",
+      "field": "tasks",
+      "type": "Task",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "Project"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "Project"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"project\""
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "Project",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[clientId]"
+            }
+          ]
+        },
+        "directive": "index"
+      }
     },
     {
       "tag": "CreateModel",
@@ -253,8 +488,8 @@
     {
       "tag": "CreateField",
       "model": "Task",
-      "field": "client",
-      "type": "Client",
+      "field": "project",
+      "type": "Project",
       "arity": "Required"
     },
     {
@@ -263,7 +498,7 @@
         "path": {
           "tag": "Field",
           "model": "Task",
-          "field": "client"
+          "field": "project"
         },
         "directive": "relation"
       }
@@ -275,12 +510,12 @@
         "path": {
           "tag": "Field",
           "model": "Task",
-          "field": "client"
+          "field": "project"
         },
         "directive": "relation"
       },
       "argument": "fields",
-      "value": "[clientId]"
+      "value": "[projectId]"
     },
     {
       "tag": "CreateArgument",
@@ -289,7 +524,7 @@
         "path": {
           "tag": "Field",
           "model": "Task",
-          "field": "client"
+          "field": "project"
         },
         "directive": "relation"
       },
@@ -299,7 +534,7 @@
     {
       "tag": "CreateField",
       "model": "Task",
-      "field": "clientId",
+      "field": "projectId",
       "type": "Int",
       "arity": "Required"
     },
@@ -309,7 +544,7 @@
         "path": {
           "tag": "Field",
           "model": "Task",
-          "field": "clientId"
+          "field": "projectId"
         },
         "directive": "map"
       }
@@ -321,12 +556,12 @@
         "path": {
           "tag": "Field",
           "model": "Task",
-          "field": "clientId"
+          "field": "projectId"
         },
         "directive": "map"
       },
       "argument": "",
-      "value": "\"client_id\""
+      "value": "\"project_id\""
     },
     {
       "tag": "CreateField",
@@ -340,7 +575,7 @@
       "model": "Task",
       "field": "specialRate",
       "type": "Float",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateDirective",
@@ -541,7 +776,7 @@
           "arguments": [
             {
               "name": "",
-              "value": "[clientId]"
+              "value": "[projectId]"
             }
           ]
         },
@@ -835,7 +1070,7 @@
       "model": "Invoice",
       "field": "file",
       "type": "String",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateField",

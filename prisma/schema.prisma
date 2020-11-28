@@ -13,23 +13,35 @@ model Client {
   vatId     String?  @map("vat_id")
   rate      Float
   createdAt DateTime @default(now()) @map("created_at")
-  tasks     Task[]
 
   @@map("client")
 }
 
+model Project {
+  id              Int         @id @default(autoincrement())
+  name            String
+  description     String?
+  client          Client      @relation(fields: [clientId], references: [id])
+  clientId        Int         @map("client_id")
+  createdAt       DateTime    @default(now()) @map("created_at")
+  tasks           Task[]
+
+  @@index([clientId])
+  @@map("project")
+}
+
 model Task {
   id          Int           @id @default(autoincrement())
-  client      Client        @relation(fields: [clientId], references: [id])
-  clientId    Int           @map("client_id")
+  project     Project       @relation(fields: [projectId], references: [id])
+  projectId   Int           @map("project_id")
   description String?
-  specialRate Float         @map("special_rate")
+  specialRate Float?        @map("special_rate")
   invoice     Invoice?      @relation(fields: [invoiceId], references: [id])
   invoiceId   Int?          @map("invoice_id")
   times       TaskTime[]
   createdAt   DateTime      @default(now()) @map("created_at")
 
-  @@index([clientId])
+  @@index([projectId])
   @@map("task")
 }
 
@@ -47,7 +59,7 @@ model TaskTime {
 model Invoice {
   id        Int           @id @default(autoincrement())
   value     Float
-  file      String
+  file      String?
   isPayed   Boolean       @default(false) @map("is_payed")
   payDate   DateTime?     @map("pay_date")
   comment   String?
