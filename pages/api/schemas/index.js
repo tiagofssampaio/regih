@@ -1,13 +1,16 @@
 import { gql } from 'apollo-server-micro';
 
-export const typeDefs = gql`    
+export const typeDefs = gql`
+
+    scalar DateTime
+    
     type Client {
         id: ID
         name: String
         vatId: String
         rate: Float
-        createdAt: String
-        tasks: [Task]
+        createdAt: DateTime
+        projects: [Project]
     }
 
     type Project {
@@ -15,7 +18,7 @@ export const typeDefs = gql`
         client: Client
         clientId: Int
         description: String
-        createdAt: String
+        createdAt: DateTime
         tasks: [Task]
     }
     
@@ -25,7 +28,7 @@ export const typeDefs = gql`
         projectId: Int
         description: String
         specialRate: Float
-        createdAt: String
+        createdAt: DateTime
         invoice: Invoice
         invoiceId: Int
         times: [TaskTime]
@@ -33,8 +36,8 @@ export const typeDefs = gql`
 
     type TaskTime {
         taskId: String
-        startTime: String
-        endTime: String
+        startTime: DateTime
+        endTime: DateTime
     }
 
     type Invoice {
@@ -42,16 +45,15 @@ export const typeDefs = gql`
         value: Float
         file: String
         isPayed: Boolean
-        payedDate: String
+        payedDate: DateTime
         comment: String
-        createdAt: String
+        createdAt: DateTime
         tasks: [Task]
     }
-
+    
     type Query {
-        clients(first: Int!, after: String): [Client]
+        clients(take: Int, skip: Int, orderBy: Int): [Client]
         client(id: ID!): Client
-
 
         projects: [Project]
         project(id: ID!): Project
@@ -60,7 +62,7 @@ export const typeDefs = gql`
         task(id: ID, projectId: String): Task
 
         invoices: [Invoice]
-        invoice(id: ID, task_id: String, project_id: String): Invoice
+        invoice(id: ID): Invoice
     }
 
     type Mutation {

@@ -8,11 +8,11 @@ const prisma = new PrismaClient(/*{ log: ["query"] }*/);
 
 export const resolvers = {
     Client: {
-        tasks: async parent => {
-            return await prisma.task.findMany({
+        projects: async parent => {
+            return await prisma.project.findMany({
                 where: {
                     clientId: parent.id
-                },
+                }
             });
         }
     },
@@ -21,7 +21,7 @@ export const resolvers = {
             return await prisma.client.findUnique({
                 where: {
                     id: parent.clientId
-                },
+                }
             });
         },
         tasks: async parent => {
@@ -37,30 +37,31 @@ export const resolvers = {
             return await prisma.project.findUnique({
                 where: {
                     id: parent.projectId
-                },
+                }
             });
         },
         times: async parent => {
             return await prisma.taskTime.findMany({
                 where: {
                     taskId: parent.id
-                },
+                }
             });
         },
         invoice: async parent => {
             return await prisma.invoice.findUnique({
                 where: {
                     id: parent.invoiceId
-                },
+                }
             });
         },
     },
     Invoice: {
         tasks: async parent => {
-            return await prisma.task
-                .findMany({
-                    where: { invoiceId: parent.id },
-                });
+            return await prisma.task.findMany({
+                where: {
+                    invoiceId: parent.id
+                }
+            });
         }
     },
     Query: {
@@ -69,56 +70,66 @@ export const resolvers = {
                 where: { id },
             });
         },
-        clients: async (_, args, context, info) => {
+        clients: async (_, { take, skip, orderBy }, context, info) => {
             /**
              * TODO
              * pagination and filters
              * relation with task and task_time
              */
-            return await prisma.client.findMany();
+            return await prisma.client.findMany({
+                take,
+                skip,
+                orderBy
+            });
         },
-
         project: async (_, { id }, context, info) => {
             return await prisma.project.findUnique({
                 where: { id },
             });
         },
-
-        projects: async (_, args, context, info) => {
+        projects: async (_, { take, skip, orderBy }, context, info) => {
             /**
              * TODO
              * pagination and filters
              */
-            return await prisma.project.findMany();
+            return await prisma.project.findMany({
+                take,
+                skip,
+                orderBy
+            });
         },
-
         task: async (_, { id }, context, info) => {
             return await prisma.task.findUnique({
                 where: { id },
             });
         },
-
-        tasks: async (_, args, context, info) => {
+        tasks: async (_, { take, skip, orderBy }, context, info) => {
             /**
              * TODO
              * pagination and filters
              */
-            return await prisma.task.findMany();
+            return await prisma.task.findMany({
+                take,
+                skip,
+                orderBy
+            });
         },
-
         invoice: async (_, { id }) => {
             return await prisma.invoice.findUnique({
                 where: { id },
             });
         },
-
-        invoices: async (_, args, context, info) => {
+        invoices: async (_, { take, skip, orderBy }, context, info) => {
             /**
              * TODO
              * pagination and filters
              * relation with task
              */
-            return await prisma.invoice.findMany();
+            return await prisma.invoice.findMany({
+                take,
+                skip,
+                orderBy
+            });
         }
     },
     Mutation: {
@@ -190,7 +201,7 @@ export const resolvers = {
         },
         updateInvoice: async (_, args) => {
         },
-        deleteInvoice: async (_, { id }) => {
+        deleteInvoice: async (_, { id: Int }) => {
             try {
                 await prisma.invoice.delete({
                     where: {
