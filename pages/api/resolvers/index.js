@@ -8,11 +8,14 @@ const prisma = new PrismaClient(/*{ log: ["query"] }*/);
 
 export const resolvers = {
     Client: {
-        projects: async parent => {
+        projects: async (parent, { take, skip, orderBy, filters }) => {
             return await prisma.project.findMany({
                 where: {
                     clientId: parent.id
-                }
+                },
+                take,
+                skip,
+                orderBy
             });
         }
     },
@@ -24,11 +27,14 @@ export const resolvers = {
                 }
             });
         },
-        tasks: async parent => {
+        tasks: async (parent, { take, skip, orderBy, filters }) => {
             return await prisma.task.findMany({
                 where: {
                     projectId: parent.id
                 },
+                take,
+                skip,
+                orderBy
             });
         }
     },
@@ -40,11 +46,14 @@ export const resolvers = {
                 }
             });
         },
-        times: async parent => {
-            return await prisma.taskTime.findMany({
+        history: async (parent, { take, skip, orderBy, filters  }) => {
+            return await prisma.taskHistory.findMany({
                 where: {
                     taskId: parent.id
-                }
+                },
+                take,
+                skip,
+                orderBy
             });
         },
         invoice: async parent => {
@@ -87,7 +96,7 @@ export const resolvers = {
                 where: { id },
             });
         },
-        projects: async (_, { take, skip, orderBy }, context, info) => {
+        projects: async (_, { take, skip, orderBy, filters  }, context, info) => {
             /**
              * TODO
              * pagination and filters
@@ -103,15 +112,17 @@ export const resolvers = {
                 where: { id },
             });
         },
-        tasks: async (_, { take, skip, orderBy }, context, info) => {
+        tasks: async (_, { take, skip, orderBy, where }, context, info) => {
             /**
              * TODO
              * pagination and filters
              */
+
             return await prisma.task.findMany({
                 take,
                 skip,
-                orderBy
+                orderBy,
+                where
             });
         },
         invoice: async (_, { id }) => {
@@ -119,7 +130,7 @@ export const resolvers = {
                 where: { id },
             });
         },
-        invoices: async (_, { take, skip, orderBy }, context, info) => {
+        invoices: async (_, { take, skip, orderBy, filters }, context, info) => {
             /**
              * TODO
              * pagination and filters
@@ -163,14 +174,31 @@ export const resolvers = {
         deleteTask: async (_, args) => {
             try {
                 await prisma.task.delete({
-                    where: {
-                        id
-                    }
+                    where: { id }
                 });
             } catch (e) {
                 return false;
             }
             return true;
+        },
+
+        addTaskHistory: async (_, data) => {
+
+            console.log('data', data);
+
+            return await prisma.taskHistory.create({
+                data
+            });
+        },
+        editTaskHistory: async (_, data) => {
+            const { id } = data;
+            delete data.id;
+
+            return await prisma.taskHistory.upsert({
+                where: { id },
+                update: {...data},
+                create: {...data}
+            });
         },
 
         createInvoice: async (_, data) => {
