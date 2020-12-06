@@ -56,7 +56,8 @@ model Task {
 }
 // TODO
 // something error in here
-// whenever I try to create a noew TaskHistory it says Unknown arg `taskId` in data.taskId for type TaskHistoryCreateInput. Did you mean `task`?
+// whenever I try to create a noew TaskHistory it says Unknown arg `taskId` in data.taskId for type TaskHistoryCreateInput.
+// Did you mean `task`?
 model TaskHistory {
   id        Int       @id @default(autoincrement())
   task      Task      @relation(fields: [taskId], references: [id])
