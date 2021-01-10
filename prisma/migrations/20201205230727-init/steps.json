@@ -25,6 +25,154 @@
     },
     {
       "tag": "CreateModel",
+      "model": "User"
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "autoincrement()"
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "name",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "email",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "password",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "createdAt",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "now()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "createdAt"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "createdAt"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"created_at\""
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "User"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "User"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"user\""
+    },
+    {
+      "tag": "CreateModel",
       "model": "Client"
     },
     {
@@ -683,8 +831,8 @@
     {
       "tag": "CreateField",
       "model": "Task",
-      "field": "times",
-      "type": "TaskTime",
+      "field": "history",
+      "type": "TaskHistory",
       "arity": "List"
     },
     {
@@ -785,11 +933,11 @@
     },
     {
       "tag": "CreateModel",
-      "model": "TaskTime"
+      "model": "TaskHistory"
     },
     {
       "tag": "CreateField",
-      "model": "TaskTime",
+      "model": "TaskHistory",
       "field": "id",
       "type": "Int",
       "arity": "Required"
@@ -799,7 +947,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "TaskTime",
+          "model": "TaskHistory",
           "field": "id"
         },
         "directive": "id"
@@ -810,7 +958,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "TaskTime",
+          "model": "TaskHistory",
           "field": "id"
         },
         "directive": "default"
@@ -822,7 +970,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "TaskTime",
+          "model": "TaskHistory",
           "field": "id"
         },
         "directive": "default"
@@ -832,7 +980,7 @@
     },
     {
       "tag": "CreateField",
-      "model": "TaskTime",
+      "model": "TaskHistory",
       "field": "task",
       "type": "Task",
       "arity": "Required"
@@ -842,7 +990,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "TaskTime",
+          "model": "TaskHistory",
           "field": "task"
         },
         "directive": "relation"
@@ -854,7 +1002,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "TaskTime",
+          "model": "TaskHistory",
           "field": "task"
         },
         "directive": "relation"
@@ -868,7 +1016,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "TaskTime",
+          "model": "TaskHistory",
           "field": "task"
         },
         "directive": "relation"
@@ -878,7 +1026,7 @@
     },
     {
       "tag": "CreateField",
-      "model": "TaskTime",
+      "model": "TaskHistory",
       "field": "taskId",
       "type": "Int",
       "arity": "Required"
@@ -888,7 +1036,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "TaskTime",
+          "model": "TaskHistory",
           "field": "taskId"
         },
         "directive": "map"
@@ -900,7 +1048,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "TaskTime",
+          "model": "TaskHistory",
           "field": "taskId"
         },
         "directive": "map"
@@ -910,8 +1058,15 @@
     },
     {
       "tag": "CreateField",
-      "model": "TaskTime",
-      "field": "startTime",
+      "model": "TaskHistory",
+      "field": "comment",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "TaskHistory",
+      "field": "startDate",
       "type": "DateTime",
       "arity": "Required"
     },
@@ -920,8 +1075,8 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "TaskTime",
-          "field": "startTime"
+          "model": "TaskHistory",
+          "field": "startDate"
         },
         "directive": "map"
       }
@@ -932,18 +1087,18 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "TaskTime",
-          "field": "startTime"
+          "model": "TaskHistory",
+          "field": "startDate"
         },
         "directive": "map"
       },
       "argument": "",
-      "value": "\"start_time\""
+      "value": "\"start_date\""
     },
     {
       "tag": "CreateField",
-      "model": "TaskTime",
-      "field": "endTime",
+      "model": "TaskHistory",
+      "field": "endDate",
       "type": "DateTime",
       "arity": "Optional"
     },
@@ -952,8 +1107,8 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "TaskTime",
-          "field": "endTime"
+          "model": "TaskHistory",
+          "field": "endDate"
         },
         "directive": "map"
       }
@@ -964,20 +1119,20 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "TaskTime",
-          "field": "endTime"
+          "model": "TaskHistory",
+          "field": "endDate"
         },
         "directive": "map"
       },
       "argument": "",
-      "value": "\"end_time\""
+      "value": "\"end_date\""
     },
     {
       "tag": "CreateDirective",
       "location": {
         "path": {
           "tag": "Model",
-          "model": "TaskTime"
+          "model": "TaskHistory"
         },
         "directive": "map"
       }
@@ -988,28 +1143,12 @@
         "tag": "Directive",
         "path": {
           "tag": "Model",
-          "model": "TaskTime"
+          "model": "TaskHistory"
         },
         "directive": "map"
       },
       "argument": "",
-      "value": "\"task_time\""
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Model",
-          "model": "TaskTime",
-          "arguments": [
-            {
-              "name": "",
-              "value": "[taskId, startTime]"
-            }
-          ]
-        },
-        "directive": "unique"
-      }
+      "value": "\"task_history\""
     },
     {
       "tag": "CreateModel",

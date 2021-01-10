@@ -7,6 +7,16 @@ datasource db {
   url = "***"
 }
 
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  password  String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("user")
+}
+
 model Client {
   id        Int      @id @default(autoincrement())
   name      String
@@ -38,22 +48,22 @@ model Task {
   specialRate Float?        @map("special_rate")
   invoice     Invoice?      @relation(fields: [invoiceId], references: [id])
   invoiceId   Int?          @map("invoice_id")
-  times       TaskTime[]
+  history     TaskHistory[]
   createdAt   DateTime      @default(now()) @map("created_at")
 
   @@index([projectId])
   @@map("task")
 }
 
-model TaskTime {
+model TaskHistory {
   id        Int       @id @default(autoincrement())
   task      Task      @relation(fields: [taskId], references: [id])
   taskId    Int       @map("task_id")
-  startTime DateTime  @map("start_time")
-  endTime   DateTime? @map("end_time")
+  comment   String?
+  startDate DateTime  @map("start_date")
+  endDate   DateTime? @map("end_date")
 
-  @@unique([taskId, startTime])
-  @@map("task_time")
+  @@map("task_history")
 }
 
 model Invoice {
